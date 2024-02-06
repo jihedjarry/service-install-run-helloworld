@@ -21,7 +21,11 @@
   shell: docker-compose -f /jarry/etc/docker-compose.yml up -d
 
 - name: recuperer l'adresse ip
-  shell: def ipApp = for i in $(docker ps -a | grep helloworld | awk '{print $1}'); do docker inspect -f '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' $i; done
+  shell: |
+        for i in $(docker ps -a | grep helloworld | awk '{print $1}'); do
+            docker inspect -f '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' $i
+        done
+      register: ipApp
 
 - name: wait for instance
   uri:
