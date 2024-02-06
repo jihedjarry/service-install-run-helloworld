@@ -22,6 +22,6 @@
 
 - name: wait for instance
   uri:
-    url: 'https://192.168.1.69:5000/'
+    url: 'http://192.168.1.69:5000'
     method: GET
   register: result
