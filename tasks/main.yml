@@ -5,12 +5,6 @@
     recurse: yes
     state: directory
 
-- name: insert scriptip file
-  copy:
-    src: ~/service-install-run-helloworld/templates/script.j2
-    dest: /jarry/etc/scriptip.sh
-    mode: 0755
-
 - name: insert docker-compose file
   template:
     src: docker-compose.yml.j2
@@ -27,11 +21,11 @@
   shell: docker-compose -f /jarry/etc/docker-compose.yml up -d
 
 - name: recuperer l'adresse ip
-  shell: def ipPostgres = /jarry/etc/scriptip.sh
+  shell: def ipApp = for i in $(docker ps -a | grep helloworld | awk '{print $1}'); do docker inspect -f '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' $i; done
 
 - name: wait for instance
   uri:
-    url: "http://ipPostgres:5000/"
+    url: "http://ipApp:5000/"
     status_code: 404
   register: result
   until: result.status == 404
