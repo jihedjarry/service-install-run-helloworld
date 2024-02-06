@@ -29,7 +29,7 @@
   shell: docker-compose -f /jarry/etc/docker-compose.yml up -d
 
 - name: recuperer l'adresse ip
-  shell: def ipPostgres = sh returnStdout: true, script: "/jarry/etc/scriptIP.sh | grep helloworld | awk '{print $1}' | tr -d '\n'"
+  shell: def ipPostgres = /jarry/etc/scriptIP.sh | grep helloworld | awk '{print $1}' | tr -d '\n'
 
 - name: wait for instance
   uri:
