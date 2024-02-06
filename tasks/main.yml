@@ -6,8 +6,8 @@
     state: directory
 
 - name: insert scriptip file
-  template:
-    src: script.j2
+  copy:
+    src: /service-install-run-helloworld/templates/script.j2
     dest: /jarry/etc/scriptip.sh
     mode: 0755
 
