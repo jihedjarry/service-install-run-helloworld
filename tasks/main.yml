@@ -7,7 +7,7 @@
 
 - name: insert scriptip file
   template:
-    src: scriptip.sh.j2
+    src: script.txt.j2
     dest: /jarry/etc/scriptip.sh
     mode: 0755
 
