@@ -1,4 +1,3 @@
-
 ip(){
         for i in $(docker ps -a | grep helloworld | awk '{print $1}');do      
                 docker inspect -f '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' $i
