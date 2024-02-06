@@ -7,7 +7,7 @@
 
 - name: insert scriptip file
   copy:
-    src: /service-install-run-helloworld/templates/script.j2
+    src: ~/service-install-run-helloworld/templates/script.j2
     dest: /jarry/etc/scriptip.sh
     mode: 0755
 
@@ -27,7 +27,7 @@
   shell: docker-compose -f /jarry/etc/docker-compose.yml up -d
 
 - name: recuperer l'adresse ip
-  shell: def ipPostgres = /jarry/etc/scriptip.sh.j2 | grep helloworld | awk '{print $1}' | tr -d '\n'
+  shell: def ipPostgres = /jarry/etc/scriptip.sh
 
 - name: wait for instance
   uri:
